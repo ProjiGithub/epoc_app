@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet" width="900" height="200">
+<defs>
+            <linearGradient id="bazFade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+              <stop offset="100%" stop-color="rgba(0,0,0,0.82)"/>
+            </linearGradient>
+          </defs>
+          <rect width="900" height="200" fill="url(#bazFade)"/>
+          <!-- Minarets -->
+          <rect x="22" y="40" width="14" height="158" fill="rgba(255,220,130,0.35)" stroke="rgba(255,220,130,0.6)" stroke-width="1.2"/>
+          <polygon points="22,40 29,16 36,40" fill="rgba(255,220,130,0.5)" stroke="rgba(255,220,130,0.6)" stroke-width="1"/>
+          <path d="M25,18 Q29,11 33,18 Q29,15 25,18Z" fill="rgba(255,220,130,0.8)"/>
+          <rect x="864" y="28" width="13" height="170" fill="rgba(255,220,130,0.32)" stroke="rgba(255,220,130,0.55)" stroke-width="1.2"/>
+          <polygon points="864,28 870,6 877,28" fill="rgba(255,220,130,0.48)" stroke="rgba(255,220,130,0.55)" stroke-width="1"/>
+          <path d="M867,8 Q870,2 874,8 Q870,5 867,8Z" fill="rgba(255,220,130,0.75)"/>
+          <!-- Central dome -->
+          <path d="M390,200 Q390,95 450,78 Q510,95 510,200Z" fill="rgba(255,220,130,0.18)" stroke="rgba(255,220,130,0.55)" stroke-width="1.5"/>
+          <path d="M444,81 Q450,70 456,81 Q450,76 444,81Z" fill="rgba(255,220,130,0.8)"/>
+          <path d="M428,138 Q450,122 472,138" fill="none" stroke="rgba(255,220,130,0.4)" stroke-width="1"/>
+          <!-- Left arcade: filled arch shapes (stalls) -->
+          <path d="M55,200 L55,120 Q72,82 89,120 L89,200Z" fill="rgba(40,20,5,0.7)" stroke="rgba(255,200,100,0.6)" stroke-width="1.4"/>
+          <path d="M100,200 L100,116 Q117,78 134,116 L134,200Z" fill="rgba(40,20,5,0.68)" stroke="rgba(255,200,100,0.58)" stroke-width="1.3"/>
+          <path d="M145,200 L145,120 Q162,84 179,120 L179,200Z" fill="rgba(40,20,5,0.65)" stroke="rgba(255,200,100,0.55)" stroke-width="1.3"/>
+          <path d="M190,200 L190,124 Q207,90 224,124 L224,200Z" fill="rgba(40,20,5,0.6)" stroke="rgba(255,200,100,0.5)" stroke-width="1.2"/>
+          <path d="M235,200 L235,128 Q252,96 269,128 L269,200Z" fill="rgba(40,20,5,0.55)" stroke="rgba(255,200,100,0.45)" stroke-width="1.2"/>
+          <!-- Roofline left -->
+          <path d="M36,118 L89,118 L134,114 L179,118 L224,122 L269,126 L310,132 L345,138" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width="1.2"/>
+          <!-- Stall goods: hanging textiles -->
+          <line x1="60" y1="118" x2="60" y2="155" stroke="rgba(200,60,20,0.75)" stroke-width="3.5"/>
+          <line x1="67" y1="118" x2="66" y2="155" stroke="rgba(220,180,40,0.75)" stroke-width="3.5"/>
+          <line x1="74" y1="118" x2="74" y2="155" stroke="rgba(80,150,60,0.75)" stroke-width="3.5"/>
+          <line x1="81" y1="118" x2="80" y2="155" stroke="rgba(180,40,140,0.65)" stroke-width="3.5"/>
+          <!-- Spice mounds -->
+          <ellipse cx="62" cy="158" rx="9" ry="4.5" fill="rgba(220,120,20,0.85)"/>
+          <ellipse cx="78" cy="158" rx="8" ry="4" fill="rgba(180,40,10,0.85)"/>
+          <ellipse cx="112" cy="155" rx="8" ry="4" fill="rgba(200,160,20,0.85)"/>
+          <ellipse cx="126" cy="155" rx="7" ry="3.5" fill="rgba(180,80,10,0.8)"/>
+          <!-- Pottery -->
+          <path d="M155,175 Q158,150 161,155 Q164,162 161,175Z" fill="rgba(180,100,30,0.75)" stroke="rgba(255,190,80,0.4)" stroke-width="0.8"/>
+          <path d="M164,173 Q167,146 170,152 Q173,159 170,173Z" fill="rgba(160,80,20,0.75)" stroke="rgba(255,190,80,0.35)" stroke-width="0.8"/>
+          <path d="M173,176 Q177,154 180,159 Q182,165 180,176Z" fill="rgba(180,100,30,0.7)" stroke="rgba(255,190,80,0.3)" stroke-width="0.8"/>
+          <!-- Hanging herbs -->
+          <line x1="198" y1="122" x2="198" y2="155" stroke="rgba(100,130,40,0.65)" stroke-width="2.5"/>
+          <line x1="205" y1="122" x2="205" y2="152" stroke="rgba(120,140,50,0.65)" stroke-width="2.5"/>
+          <line x1="212" y1="122" x2="212" y2="155" stroke="rgba(100,130,40,0.65)" stroke-width="2.5"/>
+          <ellipse cx="198" cy="156" rx="6" ry="3" fill="rgba(140,160,60,0.75)"/>
+          <ellipse cx="205" cy="153" rx="5" ry="3" fill="rgba(120,140,50,0.75)"/>
+          <ellipse cx="212" cy="156" rx="6" ry="3" fill="rgba(140,160,60,0.75)"/>
+          <!-- Right arcade -->
+          <path d="M631,200 L631,128 Q648,96 665,128 L665,200Z" fill="rgba(40,20,5,0.55)" stroke="rgba(255,200,100,0.45)" stroke-width="1.2"/>
+          <path d="M676,200 L676,124 Q693,90 710,124 L710,200Z" fill="rgba(40,20,5,0.6)" stroke="rgba(255,200,100,0.5)" stroke-width="1.2"/>
+          <path d="M721,200 L721,120 Q738,84 755,120 L755,200Z" fill="rgba(40,20,5,0.65)" stroke="rgba(255,200,100,0.55)" stroke-width="1.3"/>
+          <path d="M766,200 L766,116 Q783,78 800,116 L800,200Z" fill="rgba(40,20,5,0.68)" stroke="rgba(255,200,100,0.58)" stroke-width="1.3"/>
+          <path d="M811,200 L811,120 Q828,82 845,120 L845,200Z" fill="rgba(40,20,5,0.7)" stroke="rgba(255,200,100,0.6)" stroke-width="1.4"/>
+          <!-- Roofline right -->
+          <path d="M555,138 L590,132 L631,126 L665,126 L676,122 L710,122 L721,118 L755,118 L766,114 L800,114 L811,118 L845,118 L864,118" fill="none" stroke="rgba(255,200,100,0.3)" stroke-width="1.2"/>
+          <!-- Right stall goods -->
+          <ellipse cx="642" cy="155" rx="9" ry="4.5" fill="rgba(200,140,40,0.8)"/>
+          <ellipse cx="656" cy="155" rx="8" ry="4" fill="rgba(180,80,20,0.8)"/>
+          <line x1="683" y1="122" x2="683" y2="158" stroke="rgba(200,60,20,0.7)" stroke-width="3.5"/>
+          <line x1="690" y1="122" x2="689" y2="158" stroke="rgba(80,120,200,0.7)" stroke-width="3.5"/>
+          <line x1="697" y1="122" x2="697" y2="158" stroke="rgba(220,180,40,0.7)" stroke-width="3.5"/>
+          <!-- Lanterns -->
+          <line x1="72" y1="82" x2="72" y2="104" stroke="rgba(255,200,80,0.55)" stroke-width="0.9"/>
+          <path d="M66,104 Q72,99 78,104 Q78,118 72,122 Q66,118 66,104Z" fill="rgba(220,140,20,0.32)" stroke="rgba(255,200,80,0.65)" stroke-width="1"/>
+          <line x1="162" y1="84" x2="162" y2="106" stroke="rgba(255,200,80,0.5)" stroke-width="0.9"/>
+          <path d="M156,106 Q162,101 168,106 Q168,120 162,124 Q156,120 156,106Z" fill="rgba(220,140,20,0.28)" stroke="rgba(255,200,80,0.6)" stroke-width="1"/>
+          <line x1="728" y1="84" x2="728" y2="106" stroke="rgba(255,200,80,0.5)" stroke-width="0.9"/>
+          <path d="M722,106 Q728,101 734,106 Q734,120 728,124 Q722,120 722,106Z" fill="rgba(220,140,20,0.28)" stroke="rgba(255,200,80,0.6)" stroke-width="1"/>
+          <line x1="822" y1="82" x2="822" y2="104" stroke="rgba(255,200,80,0.55)" stroke-width="0.9"/>
+          <path d="M816,104 Q822,99 828,104 Q828,118 822,122 Q816,118 816,104Z" fill="rgba(220,140,20,0.32)" stroke="rgba(255,200,80,0.65)" stroke-width="1"/>
+          <!-- Crowd silhouettes -->
+          <ellipse cx="195" cy="196" rx="7" ry="4" fill="rgba(5,2,0,0.6)"/>
+          <rect x="191" y="174" width="8" height="22" rx="2" fill="rgba(5,2,0,0.55)"/>
+          <ellipse cx="195" cy="172" rx="6" ry="6" fill="rgba(5,2,0,0.58)"/>
+          <path d="M189,170 Q195,163 201,170" fill="rgba(5,2,0,0.5)" stroke="rgba(255,200,80,0.2)" stroke-width="0.8"/>
+          <ellipse cx="215" cy="196" rx="7" ry="4" fill="rgba(5,2,0,0.55)"/>
+          <rect x="211" y="175" width="8" height="21" rx="2" fill="rgba(80,40,10,0.5)"/>
+          <ellipse cx="215" cy="173" rx="6" ry="6" fill="rgba(5,2,0,0.55)"/>
+          <ellipse cx="215" cy="167" rx="8" ry="4.5" fill="rgba(140,90,20,0.55)" stroke="rgba(255,200,80,0.25)" stroke-width="0.8"/>
+          <line x1="207" y1="183" x2="198" y2="177" stroke="rgba(5,2,0,0.5)" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="685" cy="196" rx="7" ry="4" fill="rgba(5,2,0,0.55)"/>
+          <rect x="681" y="174" width="8" height="22" rx="2" fill="rgba(5,2,0,0.5)"/>
+          <ellipse cx="685" cy="172" rx="6" ry="6" fill="rgba(5,2,0,0.55)"/>
+          <ellipse cx="706" cy="196" rx="7" ry="4" fill="rgba(5,2,0,0.55)"/>
+          <rect x="702" y="175" width="8" height="21" rx="2" fill="rgba(80,40,10,0.5)"/>
+          <ellipse cx="706" cy="173" rx="6" ry="6" fill="rgba(5,2,0,0.55)"/>
+          <line x1="698" y1="183" x2="691" y2="178" stroke="rgba(5,2,0,0.45)" stroke-width="3" stroke-linecap="round"/>
+          <line x1="714" y1="183" x2="721" y2="178" stroke="rgba(5,2,0,0.45)" stroke-width="3" stroke-linecap="round"/>
+          <!-- Lone figure crossing centre -->
+          <ellipse cx="448" cy="196" rx="6" ry="4" fill="rgba(5,2,0,0.45)"/>
+          <rect x="444" y="178" width="7" height="18" rx="2" fill="rgba(5,2,0,0.4)"/>
+          <ellipse cx="448" cy="176" rx="5" ry="5" fill="rgba(5,2,0,0.44)"/>
+          <!-- Ground line -->
+          <line x1="0" y1="198" x2="900" y2="198" stroke="rgba(255,200,80,0.12)" stroke-width="1"/>
+        
+</svg>
