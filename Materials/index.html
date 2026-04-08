@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epoch Magazine — Candidate Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="https://arielportfolio.b-cdn.net/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --epoch-red: #C8102E;
+    --epoch-gold: #B8860B;
+    --epoch-dark: #1A1A1A;
+    --epoch-mid: #3D3D3D;
+    --epoch-light: #F5F0E8;
+    --epoch-cream: #FAF7F2;
+    --epoch-border: #D4C9B0;
+  }
+
+  body {
+    background: #2A2A2A;
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--epoch-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── MAGAZINE VIEWER ── */
+  .magazine-viewer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0 60px;
+  }
+
+  .page {
+    display: none;
+    background: var(--epoch-cream);
+    min-height: 100vh;
+    position: relative;
+    animation: pageIn 0.4s ease;
+  }
+  .page.active { display: block; }
+
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── NAVIGATION ── */
+  .nav-bar {
+    background: var(--epoch-dark);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--epoch-red);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 3px;
+  }
+  .nav-logo span { color: var(--epoch-red); }
+  .nav-subtitle {
+    color: #999;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Heebo', sans-serif;
+    text-align: center;
+  }
+  .nav-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .nav-btn {
+    background: transparent;
+    border: 1px solid #555;
+    color: white;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { background: var(--epoch-red); border-color: var(--epoch-red); }
+  .nav-btn.active { background: var(--epoch-red); border-color: var(--epoch-red); }
+  .page-counter {
+    color: #aaa;
+    font-size: 11px;
+    font-family: 'Heebo', sans-serif;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  /* ══════════════════════════════════
+     PAGE 1 — COVER
+  ══════════════════════════════════ */
+  .cover-page {
+    background: var(--epoch-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .cover-header {
+    background: var(--epoch-dark);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--epoch-red);
+  }
+  .cover-logo {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    line-height: 1;
+  }
+  .cover-meta {
+    color: #aaa;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-family: 'Heebo', sans-serif;
+    text-align: right;
+    line-height: 1.8;
+  }
+  .cover-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .cover-main-image {
+    position: relative;
+    overflow: hidden;
+    min-height: 580px;
+  }
+  .cover-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .cover-main-image:hover img { transform: scale(1.02); }
+  .cover-headline-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    padding: 40px 30px 30px;
+    color: white;
+  }
+  .cover-headline-overlay h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .cover-headline-overlay p {
+    font-size: 13px;
+    color: #ddd;
+    font-style: italic;
+  }
+  .cover-sidebar {
+    background: white;
+    padding: 30px 24px;
+    border-left: 1px solid var(--epoch-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .cover-toc-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--epoch-border);
+  }
+  .cover-toc-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cover-toc-item:hover .item-title { color: var(--epoch-red); }
+  .item-section {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 3px;
+  }
+  .item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--epoch-dark);
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+  .item-author {
+    font-size: 10px;
+    color: #888;
+    margin-top: 3px;
+    font-family: 'Heebo', sans-serif;
+  }
+  .cover-bottom-bar {
+    background: var(--epoch-dark);
+    padding: 12px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cover-bottom-bar span {
+    color: #888;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-family: 'Heebo', sans-serif;
+    text-transform: uppercase;
+  }
+  .cover-btn {
+    background: var(--epoch-red);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .cover-btn:hover { background: #a00d25; }
+
+  /* ══════════════════════════════════
+     PAGE 2 — TABLE OF CONTENTS
+  ══════════════════════════════════ */
+  .toc-page {
+    padding: 0;
+    background: var(--epoch-cream);
+  }
+  .toc-header {
+    background: var(--epoch-dark);
+    padding: 30px 50px;
+    border-bottom: 3px solid var(--epoch-red);
+  }
+  .toc-header-logo {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 36px;
+    letter-spacing: 5px;
+    font-weight: 900;
+  }
+  .toc-header-issue {
+    color: #888;
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+  .toc-body {
+    padding: 40px 50px;
+  }
+  .toc-section-label {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 20px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--epoch-red);
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .toc-entry {
+    display: flex;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 12px;
+    background: white;
+    border: 1px solid var(--epoch-border);
+  }
+  .toc-entry:hover {
+    border-color: var(--epoch-red);
+    box-shadow: 0 2px 12px rgba(200,16,46,0.1);
+  }
+  .toc-entry.featured {
+    grid-column: 1 / -1;
+    background: var(--epoch-dark);
+    border-color: var(--epoch-dark);
+    color: white;
+  }
+  .toc-entry-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--epoch-red);
+    line-height: 1;
+    min-width: 36px;
+  }
+  .toc-entry.featured .toc-entry-num { color: var(--epoch-gold); }
+  .toc-entry-content { flex: 1; }
+  .toc-entry-tag {
+    font-family: 'Heebo', sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 4px;
+  }
+  .toc-entry.featured .toc-entry-tag { color: var(--epoch-gold); }
+  .toc-entry-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--epoch-dark);
+  }
+  .toc-entry.featured .toc-entry-title { color: white; font-size: 18px; }
+  .toc-entry-desc {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+    line-height: 1.4;
+    font-style: italic;
+  }
+  .toc-entry.featured .toc-entry-desc { color: #bbb; }
+
+  /* VIDEO THUMBNAIL in TOC */
+  .toc-video-feature {
+    background: var(--epoch-dark);
+    border: 2px solid var(--epoch-gold);
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 32px;
+  }
+  .toc-video-feature:hover { border-color: var(--epoch-red); }
+  .toc-video-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .toc-video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .toc-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .play-btn {
+    width: 64px;
+    height: 64px;
+    background: rgba(200,16,46,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+  .toc-video-feature:hover .play-btn { transform: scale(1.1); }
+  .play-btn::after {
+    content: '';
+    border: 0;
+    border-style: solid;
+    border-color: transparent transparent transparent white;
+    border-width: 12px 0 12px 22px;
+    margin-left: 4px;
+  }
+  .toc-video-label {
+    color: white;
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: rgba(200,16,46,0.8);
+    padding: 4px 12px;
+  }
+  .toc-video-caption {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .toc-video-caption-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--epoch-gold);
+  }
+  .toc-video-caption-sub {
+    font-size: 11px;
+    color: #888;
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .toc-video-page-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--epoch-red);
+  }
+
+  /* ══════════════════════════════════
+     PAGE 3 — ARTICLE (translated)
+  ══════════════════════════════════ */
+  .article-page {
+    padding: 0;
+  }
+  .article-header {
+    padding: 48px 60px 36px;
+    border-bottom: 1px solid var(--epoch-border);
+    background: white;
+  }
+  .article-section-tag {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .article-section-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--epoch-red);
+    opacity: 0.3;
+  }
+  .article-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--epoch-dark);
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+  .article-subtitle {
+    font-size: 16px;
+    color: var(--epoch-mid);
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 560px;
+    margin-bottom: 20px;
+  }
+  .article-byline {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    color: #888;
+  }
+  .article-byline strong { color: var(--epoch-dark); }
+  .article-byline-dot {
+    width: 3px;
+    height: 3px;
+    background: var(--epoch-red);
+    border-radius: 50%;
+  }
+  .translator-badge {
+    background: var(--epoch-red);
+    color: white;
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+    margin-left: 8px;
+  }
+  .article-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 0;
+  }
+  .article-main {
+    padding: 40px 48px 60px 60px;
+    border-right: 1px solid var(--epoch-border);
+  }
+  .article-sidebar {
+    padding: 40px 28px;
+    background: var(--epoch-light);
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    float: left;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 0.8;
+    margin: 4px 8px 0 0;
+    color: var(--epoch-red);
+  }
+  .article-main p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #2A2A2A;
+    margin-bottom: 20px;
+  }
+  .article-main h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--epoch-dark);
+    margin: 32px 0 14px;
+    padding-top: 8px;
+    border-top: 2px solid var(--epoch-red);
+  }
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--epoch-red);
+    line-height: 1.4;
+    padding: 24px 0;
+    border-top: 2px solid var(--epoch-red);
+    border-bottom: 2px solid var(--epoch-red);
+    margin: 32px 0;
+  }
+  .sidebar-box {
+    background: white;
+    border: 1px solid var(--epoch-border);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .sidebar-box-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--epoch-border);
+  }
+  .sidebar-box p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #555;
+  }
+  .references {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--epoch-border);
+  }
+  .references h3 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  .references ol {
+    font-size: 11px;
+    color: #888;
+    line-height: 1.8;
+    padding-left: 16px;
+  }
+
+  /* ══════════════════════════════════
+     PAGE 4 — RECIPE (TAHDIG)
+  ══════════════════════════════════ */
+  .recipe-page {
+    background: var(--epoch-cream);
+  }
+  .recipe-hero {
+    position: relative;
+    height: 480px;
+    overflow: hidden;
+  }
+  .recipe-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+  .recipe-hero:hover img { transform: scale(1.03); }
+
+  .recipe-bazaar-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .recipe-bazaar-overlay svg {
+    width: 100%;
+    height: 100%;
+  }
+  /* Push recipe hero text overlay above the bazaar */
+  .recipe-hero-overlay {
+    z-index: 3;
+  }
+
+  .recipe-photo-credit {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .recipe-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 40px 50px;
+  }
+  .recipe-hero-text {
+    color: white;
+    max-width: 500px;
+  }
+  .recipe-tag {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--epoch-gold);
+    margin-bottom: 10px;
+  }
+  .recipe-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .recipe-subtitle {
+    font-size: 14px;
+    color: #ddd;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .recipe-body {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 0;
+    min-height: 600px;
+  }
+  .recipe-ingredients {
+    background: var(--epoch-dark);
+    color: white;
+    padding: 36px 30px;
+  }
+  .ingredients-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--epoch-gold);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+  }
+  .ingredient-group {
+    margin-bottom: 20px;
+  }
+  .ingredient-group-name {
+    font-family: 'Heebo', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 10px;
+  }
+  .ingredient-item {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid #333;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #ddd;
+  }
+  .ingredient-item::before {
+    content: '·';
+    color: var(--epoch-gold);
+    flex-shrink: 0;
+  }
+  .recipe-steps {
+    padding: 36px 40px;
+    background: white;
+  }
+  .steps-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--epoch-red);
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--epoch-red);
+    opacity: 0.3;
+    line-height: 1;
+    min-width: 36px;
+  }
+  .step-content { flex: 1; }
+  .step-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--epoch-dark);
+    margin-bottom: 6px;
+  }
+  .step-text {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #444;
+  }
+  .step-image {
+    margin-top: 12px;
+    border: 2px solid var(--epoch-border);
+    overflow: hidden;
+    position: relative;
+    height: 300px;
+    background: var(--epoch-light);
+  }
+  .step-image .img-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px) brightness(0.85) saturate(0.9);
+    transform: scale(1.12);
+    z-index: 0;
+  }
+  .step-image img {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    transform: scale(1);
+    transition: transform 0.6s ease;
+    transform-origin: center center;
+  }
+  .step-image:hover img {
+    transform: scale(1.35);
+  }
+  .step-image-caption {
+    background: var(--epoch-dark);
+    color: #888;
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-top: 1px solid #333;
+  }
+  .step-note {
+    background: var(--epoch-light);
+    border-left: 3px solid var(--epoch-gold);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* VIDEO embed step */
+  .video-step {
+    margin-top: 10px;
+    border: 2px solid var(--epoch-red);
+    overflow: hidden;
+    position: relative;
+  }
+  .video-step iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+    display: block;
+  }
+  .video-label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--epoch-red);
+    color: white;
+    font-family: 'Heebo', sans-serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  /* ══════════════════════════════════
+     PAGE 5 — COVER LETTER
+  ══════════════════════════════════ */
+  .letter-page {
+    background: white;
+    padding: 60px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .letter-header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--epoch-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .letter-from {
+    font-family: 'Heebo', sans-serif;
+    font-size: 12px;
+    color: #888;
+    line-height: 2;
+  }
+  .letter-to {
+    font-family: 'Heebo', sans-serif;
+    font-size: 12px;
+    color: #888;
+    line-height: 2;
+    text-align: right;
+  }
+  .letter-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--epoch-dark);
+  }
+  .letter-body p { margin-bottom: 20px; }
+  .letter-body strong { color: var(--epoch-red); }
+  .letter-signature {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--epoch-border);
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+  }
+  .letter-positions {
+    margin: 32px 0;
+    background: var(--epoch-light);
+    border: 1px solid var(--epoch-border);
+    padding: 24px;
+  }
+  .letter-positions-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 16px;
+  }
+  .position-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0d8cc;
+  }
+  .position-item:last-child { border-bottom: none; }
+  .position-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--epoch-red);
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .position-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--epoch-dark);
+  }
+  .position-text strong {
+    color: var(--epoch-dark);
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ══════════════════════════════════
+     PAGE 6 — THE WANDERING APPRENTICE PITCH
+  ══════════════════════════════════ */
+  .pitch-page {
+    background: var(--epoch-cream);
+  }
+  .pitch-header {
+    background: var(--epoch-dark);
+    padding: 48px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pitch-header::before {
+    content: 'WA';
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+  }
+  .pitch-tag {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--epoch-gold);
+    margin-bottom: 12px;
+  }
+  .pitch-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .pitch-subtitle {
+    font-size: 15px;
+    color: #bbb;
+    font-style: italic;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+  .pitch-body {
+    padding: 48px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .pitch-section-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--epoch-red);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--epoch-red);
+  }
+  .pitch-body p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .skill-chip {
+    background: var(--epoch-dark);
+    color: white;
+    padding: 8px 12px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .skill-chip::before {
+    content: '→';
+    color: var(--epoch-gold);
+  }
+  .pitch-value-box {
+    background: var(--epoch-dark);
+    color: white;
+    padding: 28px;
+    margin-top: 16px;
+    border-left: 4px solid var(--epoch-red);
+  }
+  .pitch-value-box p {
+    color: #ccc;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .pitch-value-box strong { color: var(--epoch-gold); font-style: normal; }
+
+  /* Photo grid in pitch page */
+  .photo-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 0 60px 40px;
+  }
+  .photo-strip img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transition: filter 0.3s;
+  }
+  .photo-strip img:hover { filter: grayscale(0%); }
+
+  /* Responsive */
+  @media(max-width: 700px) {
+    .cover-body { grid-template-columns: 1fr; }
+    .article-body { grid-template-columns: 1fr; }
+    .recipe-body { grid-template-columns: 1fr; }
+    .pitch-body { grid-template-columns: 1fr; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .photo-strip { grid-template-columns: repeat(2,1fr); }
+    .letter-header { flex-direction: column; gap: 16px; }
+    .letter-page { padding: 30px 20px; }
+  }
+
+  /* ── COVER new layout classes ── */
+  .cover-page {
+    position: relative !important;
+    background: #3a2e24 !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+  .cover-bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    z-index: 0;
+  }
+  .cover-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.35) 0%,
+      rgba(0,0,0,0.1) 40%,
+      rgba(0,0,0,0.55) 80%,
+      rgba(0,0,0,0.82) 100%
+    );
+    z-index: 1;
+  }
+  .cover-page > * { position: relative; z-index: 2; }
+  .cover-header {
+    background: transparent !important;
+    border-bottom: none !important;
+    padding: 24px 48px 8px !important;
+    align-items: flex-end !important;
+  }
+  .cover-logo {
+    font-family: 'Playfair Display', serif !important;
+    color: white !important;
+    font-size: 72px !important;
+    font-weight: 400 !important;
+    font-style: italic !important;
+    letter-spacing: 2px !important;
+    display: block !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5) !important;
+  }
+  .cover-tagline {
+    font-family: 'Heebo', sans-serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 4px;
+  }
+  .cover-issue-info {
+    font-family: 'Heebo', sans-serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1px;
+    text-align: right;
+    line-height: 1.8;
+  }
+  .cover-illustration-area {
+    display: none;
+  }
+  .cover-headline-block {
+    padding: 14px 48px 8px;
+    text-align: center;
+    margin-top: auto;
+  }
+  .cover-headline-block h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.7);
+  }
+  .cover-teasers {
+    padding: 0 48px 28px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+    margin-top: 8px;
+  }
+  .cover-teasers-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding-top: 10px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+  .cover-teaser-item {
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .cover-teaser-item:hover { color: #ff6b6b; }
+  .cover-teaser-pg { font-weight: 700; color: white; min-width: 24px; font-size: 11px; }
+  .cover-teaser-dot { color: rgba(255,255,255,0.4); }
+  .cover-teaser-text { flex: 1; }
+  .cover-barcode-area {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 8px;
+    color: rgba(255,255,255,0.5);
+    text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<div class="nav-bar">
+  <div class="nav-logo">EP<span>O</span>CH</div>
+  <div class="nav-subtitle">Candidate Portfolio — March 2026</div>
+  <div class="nav-controls">
+    <button class="nav-btn" onclick="goTo(0)">Cover</button>
+    <button class="nav-btn" onclick="goTo(1)">Letter</button>
+    <button class="nav-btn" onclick="goTo(2)">Article</button>
+    <button class="nav-btn" onclick="goTo(3)">Recipe</button>
+    <button class="nav-btn" onclick="goTo(4)">Pitch</button>
+    <div class="page-counter" id="pageCounter">1 / 5</div>
+  </div>
+</div>
+
+<div class="magazine-viewer">
+
+<!-- ════════════════════════════════
+     PAGE 1 — COVER
+════════════════════════════════ -->
+<div class="page active" id="page0">
+  <div class="cover-page">
+    <!-- Full-bleed background image -->
+    <img class="cover-bg-image" src="https://arielportfolio.b-cdn.net/magazine-cover.webp" alt="Magazine Cover" loading="eager" fetchpriority="high">
+    <div class="cover-bg-overlay"></div>
+
+
+
+    <div class="cover-headline-block">
+      <h1 data-elem="4">The Wandering Apprentice</h1>
+      <div style="font-family:'Heebo',sans-serif;font-size:13px;color:#666;font-style:italic;margin-top:4px;" data-elem="5">A Portfolio of Skills, Stories &amp; Translation</div>
+    </div>
+
+    <div class="cover-teasers">
+      <div class="cover-teasers-inner">
+        <div class="cover-teaser-item" onclick="goTo(1)">
+          <span class="cover-teaser-pg" data-elem="6">P.2</span>
+          <span class="cover-teaser-dot">·</span>
+          <span class="cover-teaser-text" data-elem="7">Cover Letter &mdash; Why Epoch, and what each role gets from this candidate</span>
+        </div>
+        <div class="cover-teaser-item" onclick="goTo(2)">
+          <span class="cover-teaser-pg" data-elem="8">P.3</span>
+          <span class="cover-teaser-dot">·</span>
+          <span class="cover-teaser-text" data-elem="9">The Man Who Refused to Surrender to Fate&rsquo;s Blows &middot; Translated from Hebrew &middot; Dina Gordon</span>
+        </div>
+        <div class="cover-teaser-item" onclick="goTo(3)">
+          <span class="cover-teaser-pg" data-elem="10">P.4</span>
+          <span class="cover-teaser-dot">·</span>
+          <span class="cover-teaser-text" data-elem="11">Tahdig &mdash; Persian Upside-Down Rice with Gondi &middot; Original Recipe with Video</span>
+        </div>
+        <div class="cover-teaser-item" onclick="goTo(4)">
+          <span class="cover-teaser-pg" data-elem="12">P.5</span>
+          <span class="cover-teaser-dot">·</span>
+          <span class="cover-teaser-text" data-elem="13">The Wandering Apprentice &middot; Proposed Column: Reclaiming Lost Skills Across the World</span>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE 2 — COVER LETTER
+════════════════════════════════ -->
+════════════════════════════════ -->
+<div class="page" id="page1">
+  <div class="letter-page">
+    <div class="letter-header">
+      <div class="letter-from">
+        <strong style="font-size:14px;color:var(--epoch-dark);display:block;margin-bottom:4px;" data-elem="16">Candidate</strong>
+        Tel Aviv, Israel<br>
+        March 2026
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;letter-spacing:4px;color:var(--epoch-dark);" data-elem="17">EPOCH</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:2px;color:var(--epoch-red);text-transform:uppercase;margin-top:2px;" data-elem="18">Portfolio Submission</div>
+      </div>
+      <div class="letter-to">
+        <strong style="font-size:14px;color:var(--epoch-dark);display:block;margin-bottom:4px;" data-elem="19">Epoch Magazine</strong>
+        Editorial Team<br>
+        Israel
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <p data-elem="20">To the Epoch Editorial Team,</p>
+
+      <p data-elem="21">I've been reading Epoch for long enough to know that what makes it different isn't just the topics — it's the depth. Every article I've encountered asks something more of the reader than most Israeli media dare to: a willingness to sit with a difficult idea, to follow a person's story beyond the headline, to leave with something that actually changes how you see the world. That's the kind of writing I want to be part of.</p>
+
+      <p data-elem="22">I'm applying for <strong data-elem="23">multiple positions</strong> — translator &amp; editor, food &amp; recipe writer, and travel writer — because I genuinely believe I bring something distinct to each of them. I'll let this portfolio do the talking, but I want to be transparent about where I'm coming from.</p>
+
+      <div class="letter-positions">
+        <div class="letter-positions-title" data-elem="24">Positions Applied For — What I'm Bringing</div>
+
+        <div class="position-item">
+          <div class="position-dot"></div>
+          <div class="position-text">
+            <strong data-elem="25">Hebrew-to-English Translator &amp; Editor</strong>
+            I've translated and edited the William Mitchell article in this portfolio from Hebrew into publication-ready American English. Native-level English, strong Hebrew — and a genuine feel for journalistic voice and rhythm across both languages.
+          </div>
+        </div>
+
+        <div class="position-item">
+          <div class="position-dot"></div>
+          <div class="position-text">
+            <strong data-elem="26">Food &amp; Recipe Writer</strong>
+            I'm not a trained chef, and I don't want to pretend to be. What I am is someone with a serious palate and the instinct to take a traditional recipe somewhere unexpected. The tahdig in this portfolio is my own adaptation — saffron brewed from scratch, a cranberry-pistachio topping that isn't in any standard version. I've made dishes like Gondi, Sarmale (Romanian stuffed cabbage), and Bagna Càuda — the classic Piedmontese anchovy-and-garlic dip I prepared for my brother's birthday in honor of a TV show we both love. I follow no recipe exactly; I improvise, taste, and adjust. That instinct is what I'd bring to this column.
+          </div>
+        </div>
+
+        <div class="position-item">
+          <div class="position-dot"></div>
+          <div class="position-text">
+            <strong data-elem="27">Travel &amp; Tourism / Other (Proposed Column)</strong>
+            The concept I'm pitching — <em data-elem="28">The Wandering Apprentice</em> — isn't about destination tourism. It's about what happens when you stop being a traveler and start being a student: volunteering on farms through WWOOF-style programs to learn carpentry, traditional agriculture and permaculture, livestock, fishing, and hunting. Complemented by formal workshops in photography, handyman skills, surfing, and freediving. Each skill isn't a hobby — it's a transfer of knowledge that used to be common and isn't anymore. I want to give Epoch's readers a front-row seat to that reclamation.
+          </div>
+        </div>
+      </div>
+
+      <p data-elem="29">What draws me most to Epoch isn't the prestige — it's the fact that the magazine trusts its readers to think. The article I translated, about W. Mitchell, is exactly the kind of content that proves that: it doesn't simplify, it doesn't preach, it just tells a true story with enough honesty and precision that the lesson lands on its own. I want to contribute to more of those moments.</p>
+
+      <p data-elem="30">I'm hardworking, curious, and I plan ahead. I'd come to this role with a pipeline of ideas — for the recipe column, for the travel series, and for the translation desk — because I don't believe in submitting one piece and waiting. I believe in building something.</p>
+
+      <p data-elem="31">Thank you for considering this portfolio.</p>
+    </div>
+
+    <div class="letter-signature" data-elem="32">
+      With respect and enthusiasm,<br>
+      <span style="font-size:22px;" data-elem="33">The Candidate</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE 3 — TRANSLATED ARTICLE
+════════════════════════════════ -->
+════════════════════════════════ -->
+<div class="page" id="page2">
+  <div class="article-page">
+    <div class="article-header">
+      <div class="article-section-tag" data-elem="34">Psychology · Personal Development</div>
+      <h1 class="article-title" data-elem="35">The Man Who Refused to Surrender to Fate's Blows</h1>
+      <p class="article-subtitle" data-elem="36">William Mitchell lost his looks, his body, and his way of life — but not his spirit. From the ashes, he discovered three simple principles that transformed his pain into a life-changing force.</p>
+      <div class="article-byline">
+        <span><strong data-elem="37">Dina Gordon</strong></span>
+        <div class="article-byline-dot"></div>
+        <span data-elem="38">November 10, 2025</span>
+        <div class="article-byline-dot"></div>
+        <span data-elem="39">8 min read</span>
+        <span class="translator-badge" data-elem="40">Translated &amp; Edited from Hebrew</span>
+      </div>
+    </div>
+
+    <div class="article-body">
+      <div class="article-main">
+        <p class="drop-cap" data-elem="41">William Mitchell felt like a king on the streets of San Francisco. He had the face and body of a movie star, a coveted job, a dream salary, a beautiful girlfriend, a wealth of friends and parties every weekend.</p>
+
+        <p data-elem="42">In July 1971, at age 28, he was feeling particularly on top of the world: he had just received his first pilot&#8217;s license and was on his way home, riding a large, luxurious motorcycle he had bought a day earlier at a motorcycle market. As fate would have it, on that of all days, a truck ran a red light and slammed into him. He was thrown from the bike, breaking his shoulder and pelvis. The tank&#8217;s fuel cap was thrown off as well and gasoline began pouring over him &#8212; within seconds, a spark from the engine turned him into a human torch. He was rushed to the hospital. Doctors gave him a 50% chance of survival.</p>
+
+        <p data-elem="43">Mitchell lay unconscious for two weeks. When he came to, he gradually discovered that his face was scarred and disfigured, all his fingers had been amputated, and 65% of his body was covered in severe burns.</p>
+
+        <p data-elem="43b">In the fog of pain and helplessness, three principles he had learned throughout his life surfaced in his memory &#8212; three thin threads of light that showed him, in his darkest hour, a doorway of hope.</p>
+
+        <div class="pull-quote" data-elem="44">&#8220;It&#8217;s not what happens to you &#8212; it&#8217;s how you respond to what happens.&#8221;</div>
+
+        <h2 data-elem="45">1. You Alone Are Responsible for Your Life</h2>
+
+        <p data-elem="46">Mitchell&#8217;s condition required around-the-clock medical supervision and intensely painful treatment. &#8220;You cannot even imagine an injury from burns at that level. It is the most catastrophic, difficult and painful condition a human being can endure,&#8221; he heard his doctor say. &#8220;It&#8217;s as if your skin is being stripped off anew every single day.&#8221; Mitchell described all of this in his book, <em data-elem="46b">It&#8217;s Not What Happens to You.</em></p>
+
+        <p data-elem="47">Despite the presence of two dedicated private nurses, Mitchell felt like a limp marionette. His ability to endure steadily eroded until one day he asked to die. In response, his doctor came into the room and made an unconventional offer: Mitchell himself would manage his own treatment plan. Since only he knew how much he could bear, the doctor explained, they would go through the treatment plan together item by item, and Mitchell would decide how to proceed and what to forgo.</p>
+
+        <p data-elem="47b">Taking responsibility for his treatment was like an empowerment bomb. The word <em data-elem="48">responsibility</em> is derived from <em data-elem="49">response</em> and <em data-elem="50">ability</em> &#8212; and for Mitchell, that meaning was fully realized: active participation in the process gave him both the ability and the willingness to control, even if only slightly, his own condition.</p>
+
+        <p data-elem="47c">&#8220;You alone are responsible for your life,&#8221; he recalled a principle he had learned long before, and now, precisely in the depths of hardship, he was given the chance to truly live it.</p>
+
+        <p data-elem="47d">Mitchell&#8217;s insight echoes the story of Ken Campbell, who in 1983 survived a nearly identical accident: a fuel truck hit his car and burned 75% of his body at the most severe burn degree. Doctors said he would not make it. But when he regained consciousness, he declared that he alone was responsible for his life &#8212; and chose to survive. When doctors claimed he would never walk again, he got up. When they warned he could never compete in an Ironman triathlon, he crossed the finish line in tears of victory.</p>
+
+        <p data-elem="51">Mitchell spent four months in hospital. One caregiver who left a deep impression on him was his physiotherapist, Beverley. In his imagination, in her past, she had been a marine combat fitness instructor &#8212; tough, rigid, merciless, and uncompromising. Every day she would come into his room with a list of five tasks that seemed impossible to him. She never let a single one slide. Yet it was precisely because of her that, day after day, Mitchell managed to complete five more tasks that had seemed impossible at the outset.</p>
+
+        <p data-elem="51b">After four months, Mitchell decided it was time to leave the hospital. The doctors objected, but Beverley argued that if Mitchell had chosen to take responsibility for his life, everyone should support that decision and prepare him for his new mission: managing his life outside the hospital. And so, it was.</p>
+
+        <h2 data-elem="52">2. Accept Yourself as You Are</h2>
+
+        <p data-elem="53">Mitchell&#8217;s transition to life outside the hospital came with many difficulties. Countless trivial actions became challenges &#8212; and Mitchell would sometimes just lie in bed, crying and screaming in frustration. How do you open a door when you have no fingers and the lightest touch causes sharp pain? Gradually he learned that his thoughts could be either his prison or a doorway to creativity. He learned to open doors and turn on the TV with his foot, and to eat independently by fastening a rubber band to his hand.</p>
+
+        <p data-elem="54">But the most difficult ordeal was moving through the world among other people. Before the accident he had thought of himself as handsome &#8212; he had even had surgery on his chin to look more like the actors he admired in Hollywood films. Now he felt that people on the street avoided looking at him, and those who did speak to him avoided making eye contact.</p>
+
+        <p data-elem="54b">One day, a group of children shouted after him: &#8220;Monster, monster.&#8221; Yet in that moment Mitchell felt not anger, but an awakening to the second principle: <em data-elem="55">accept yourself as you are</em>. He remembered that if you focus too much on the negative aspects of yourself, you actually reinforce them and prevent yourself from overcoming them. It is better to direct your energy toward what is good in you and what you succeed at &#8212; and those parts grow stronger, while the less successful ones gradually shrink.</p>
+
+        <p data-elem="54c">American therapist Sean Stephenson was one of the most powerful advocates of self-acceptance. Stephenson was born with a severe condition that made his bones fragile and brittle. Doctors told his parents he would live only a few days, but they were proven wrong. His body was small, his face disfigured &#8212; but his spirit was enormous. He began leading motivational workshops at age 17, later married, completed an undergraduate degree, and wrote two motivational books.</p>
+
+        <p data-elem="54d">&#8220;Don&#8217;t believe any forecast that doesn&#8217;t empower you,&#8221; Stephenson said in a TEDx talk. &#8220;If you believe a forecast that doesn&#8217;t empower you, you&#8217;ll be like a flower that wilts and dies a physical or spiritual death. If people who see me feel sorry for me, they&#8217;re wasting their time &#8212; because I chose a life of empowerment.&#8221; He explained that when people begin to pity themselves and feel insecure, they lose their sense of inner worth and begin seeking validation from outside. &#8220;You become your own prison, which is why you must love and cherish yourself.&#8221; He passed away at age 38. His final words: &#8220;This didn&#8217;t happen to me &#8212; it happened <em>for</em> me.&#8221;</p>
+
+        <h2 data-elem="56">3. You Can Choose How to Respond to Life&#8217;s Hardships</h2>
+
+        <p data-elem="57">Mitchell gradually returned to an independent life. Six months after the accident, he returned to flying &#8212; first with an instructor, and after 50 hours of flight time, he was able to take off alone again. To mark this moving moment, he bought himself a brand new Cessna 206. He moved to a beautiful town in Colorado, became a successful businessman, and felt he had won the battle for his life.</p>
+
+        <p data-elem="57b">But fate had other plans. In November 1975, a technical malfunction caused his plane to crash on the runway. All four passengers walked away unharmed &#8212; but Mitchell, just 32 years old, had severely hurt his back. He was paralyzed from the waist down and would be confined to a wheelchair for the rest of his life.</p>
+
+        <p data-elem="57c">Outwardly Mitchell remained quiet, keeping his sarcastic sense of humor intact. But inside, he felt broken and despairing. After four years of rebuilding his life from the ashes of that fire, he found himself at rock bottom once again.</p>
+
+        <p data-elem="58">One day, while lying in the hospital drained of strength and motivation, he received a call from a woman who lived in his town. &#8220;You may not remember me,&#8221; she said, &#8220;but a year ago, when I was going through a very hard time, you said something I&#8217;ll never forget: <em data-elem="59">&#8216;It&#8217;s not what happens to you, it&#8217;s how you respond to what happens.&#8217;</em> Do you still believe that?&#8221;</p>
+
+        <p data-elem="60">Her words hit him like lightning. At that moment he remembered that the very fire that had nearly taken his life was also the one that had allowed him to grow and change in ways he had never imagined. He told himself: <em data-elem="61">You can choose how to respond to the hardships in your life</em> &#8212; took a deep breath, and decided once again to see the hand he had been dealt as an opportunity for growth.</p>
+
+        <p data-elem="62">Mitchell began running his business from his hospital bed. He later learned to maneuver his wheelchair with skill &#8212; navigating streets, supermarkets, airports, and the campus of the University of Colorado, where he completed an MBA. His determination, courage, and financial success led him in 1977 to be elected mayor of Crested Butte, Colorado. But more than anything, he felt he was fulfilling his purpose when he stood on stage and lectured to struggling adults and youth across the United States, spreading messages of hope, strength, and courage.</p>
+
+        <p data-elem="62b">In his talks he also shares the story of Eddie Jaku, a Holocaust survivor whose entire family was murdered in the camps. Jaku survived the horror of the camps and death marches, and for many years lived in bitterness and anger. But after meeting his wife, marrying, and having his first child, his heart opened again. &#8220;I promised myself that from that day on I would be happy and smile always, be kind and help others,&#8221; he said in a moving TEDx talk. &#8220;Happiness doesn&#8217;t fall on you from the sky &#8212; it is your responsibility. Happiness brings health to body and soul.&#8221;</p>
+
+        <p data-elem="62c">Recalling every time he had faced death, Jaku was filled with gratitude for the life he had been given. &#8220;I no longer hate anyone,&#8221; he said. &#8220;Hatred is a disease &#8212; it may destroy your enemy, but along the way it destroys you too.&#8221; At age 99, a year before his death, he published a book about his life carrying an inspiring message of joy and hope. Mitchell tells his audiences that Jaku is an extraordinary person &#8212; but also an ordinary person, just like them. &#8220;Neither Jaku nor I have superpowers,&#8221; he says. &#8220;We simply chose to do what was right &#8212; and so can you.&#8221;</p>
+
+        <p data-elem="63">&#8220;Your life is what you decide it will be,&#8221; he tells his audiences. &#8220;It is your ship &#8212; and you decide when it sails and when it sinks. It all begins in your mind and spreads outward into the world. Change what happens in your head &#8212; and the world outside will change with it.&#8221;</p>
+
+        <div class="references">
+          <h3 data-elem="64">References</h3>
+          <ol>
+            <li data-elem="65">W. Mitchell, <em data-elem="66">It&#8217;s Not What Happens to You</em>, 1997</li>
+            <li data-elem="67">The Ride and Tie Association, &#8220;Do the Hard Things, interview with Ken Campbell,&#8221; YouTube, October 2024</li>
+            <li data-elem="68">Sean Stephenson, &#8220;The Prison of Your Mind,&#8221; TEDx Talks</li>
+            <li data-elem="69">Eddie Jaku, &#8220;A Holocaust Survivor&#8217;s Blueprint for Happiness,&#8221; TEDx, May 2019</li>
+            <li data-elem="70">Eddie Jaku, <em data-elem="71">The Happiest Man on Earth</em>, Tchelet, 2021</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="article-sidebar">
+        <div class="sidebar-box">
+          <div class="sidebar-box-title" data-elem="72">Translator's Note</div>
+          <p data-elem="73">This article was originally published in Hebrew by Epoch Magazine (Israel). I translated and adapted it into publication-ready American English, preserving the journalistic voice while ensuring natural flow and cultural accuracy for a US readership.</p>
+        </div>
+        <div class="sidebar-box">
+          <div class="sidebar-box-title" data-elem="74">About the Subject</div>
+          <p><strong data-elem="75">W. Mitchell</strong> is an American motivational speaker, author, and politician. After surviving two near-fatal accidents, he served as mayor of Crested Butte, Colorado, and has delivered over 3,000 keynote speeches worldwide.</p>
+        </div>
+        <div class="sidebar-box">
+          <div class="sidebar-box-title" data-elem="76">The Three Principles</div>
+          <p data-elem="77">1. <strong data-elem="78">You alone are responsible for your life.</strong><br><br>
+          2. <strong data-elem="79">Accept yourself as you are.</strong><br><br>
+          3. <strong data-elem="80">You can choose how to respond to hardship.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE 4 — TAHDIG RECIPE
+════════════════════════════════ -->
+<div class="page" id="page3">
+  <div class="recipe-page">
+    <div class="recipe-hero">
+      <!-- previous cover.jpg commented out -->
+      <img data-src="https://arielportfolio.b-cdn.net/bazar.webp" src="" alt="Tahdig" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">
+      <div class="recipe-photo-credit" data-elem="81">Photography · The Candidate</div>
+      <!-- Persian Bazaar Illustration Overlay -->
+      <div class="recipe-bazaar-overlay">
+        <img data-src="https://arielportfolio.b-cdn.net/bazar-overlay.svg" src="" alt="Persian Bazaar" style="width:100%;height:100%;display:block;">
+      </div>
+      <div class="recipe-hero-overlay" data-elem="81b" style="padding:0;display:flex;align-items:flex-end;">
+        <!-- Iranian bazaar drawing replaces text overlay -->
+        <img data-src="https://arielportfolio.b-cdn.net/bazar-overlay.svg" src="" alt="Persian Bazaar Overlay" style="width:100%;height:200px;display:block;object-fit:cover;">
+      </div>
+    </div>
+
+    <div class="recipe-body">
+      <div class="recipe-ingredients">
+        <div class="ingredients-title" data-elem="82">Ingredients</div>
+
+        <div class="ingredient-group">
+          <div class="ingredient-group-name" data-elem="83">The Rice</div>
+          <div class="ingredient-item" data-elem="84">500g jasmine rice</div>
+        </div>
+
+        <div class="ingredient-group">
+          <div class="ingredient-group-name" data-elem="85">The Base</div>
+          <div class="ingredient-item" data-elem="86">Potatoes — enough to cover base, sliced 1cm thick</div>
+          <div class="ingredient-item" data-elem="87">Generous olive oil (to coat pot base)</div>
+          <div class="ingredient-item" data-elem="88">40g butter, divided</div>
+        </div>
+
+        <div class="ingredient-group">
+          <div class="ingredient-group-name" data-elem="89">Spices</div>
+          <div class="ingredient-item" data-elem="90">Salt, black pepper</div>
+          <div class="ingredient-item" data-elem="91">1 tbsp soup powder</div>
+          <div class="ingredient-item" data-elem="92">½ tsp turmeric (for golden base)</div>
+          <div class="ingredient-item" data-elem="93">Sweet paprika</div>
+        </div>
+
+        <div class="ingredient-group">
+          <div class="ingredient-group-name" data-elem="94">Topping Mixture</div>
+          <div class="ingredient-item" data-elem="95">Handful pine nuts</div>
+          <div class="ingredient-item" data-elem="96">Handful candied cranberries</div>
+          <div class="ingredient-item" data-elem="97">Handful pistachios</div>
+          <div class="ingredient-item" data-elem="98">Handful fried onion flakes</div>
+        </div>
+
+        <div class="ingredient-group">
+          <div class="ingredient-group-name" data-elem="99">Saffron Extract</div>
+          <div class="ingredient-item" data-elem="100">1 tbsp saffron threads</div>
+          <div class="ingredient-item" data-elem="101">2 cups ice-cold water</div>
+          <div class="ingredient-item" data-elem="102">1 tsp brown sugar</div>
+        </div>
+
+        <div style="margin-top:24px;padding:16px;background:#222;border-left:3px solid var(--epoch-gold);">
+          <div style="color:var(--epoch-gold);font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;" data-elem="103">Serve With</div>
+          <div style="color:#ccc;font-size:12px;line-height:1.6;" data-elem="104">Persian Gondi (chickpea dumpling soup) — recipe on next page</div>
+        </div>
+      </div>
+
+      <div class="recipe-steps">
+        <div class="steps-title" data-elem="105">Method</div>
+
+        <div class="step">
+          <div class="step-num" data-elem="106">1</div>
+          <div class="step-content">
+            <div class="step-title" data-elem="107">Parboil the Rice</div>
+            <div class="step-text" data-elem="108">Rinse rice until water runs clear, then soak for 2 hours. Cook like pasta: bring 5L salted water to a boil, add rice, cook 7 minutes until grains soften on the outside but remain firm in the center. Drain and rinse cold to stop cooking.</div>
+            <div class="step-image">
+              <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-1.webp')"></div>
+              <img data-src="https://arielportfolio.b-cdn.net/step-1.webp" src="" alt="Potato base" style="object-position:center top;">
+              <div class="step-image-caption" data-elem="109">The potato base — sliced 1cm, tiled tight</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num" data-elem="110">2</div>
+          <div class="step-content">
+            <div class="step-title" data-elem="111">Brew the Saffron Extract</div>
+            <div class="step-text" data-elem="112">Blend saffron, ice-cold water and brown sugar until combined. Cover and let steep for one hour. The liquid will turn a deep amber gold.</div>
+            <div class="step-image">
+              <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-2.webp')"></div>
+              <img data-src="https://arielportfolio.b-cdn.net/step-2.webp" src="" alt="Saffron extract" style="object-position:center center;">
+              <div class="step-image-caption" data-elem="113">Rice over potatoes — before the saffron pour</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num" data-elem="114">3</div>
+          <div class="step-content">
+            <div class="step-title" data-elem="115">Prepare the Topping Mixture</div>
+            <div class="step-text" data-elem="116">Heat olive oil and 20g butter in a pan. Add pine nuts first — toast until lightly golden. Add remaining topping ingredients and stir-fry 2 minutes. Pour in half a cup of saffron extract with salt and pepper; cook one more minute.</div>
+            <div class="step-image">
+              <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-3.webp')"></div>
+              <img data-src="https://arielportfolio.b-cdn.net/step-3.webp" src="" alt="Topping mix" style="object-position:center center;">
+              <div class="step-image-caption" data-elem="117">The saffron extract — deep amber after one hour steep</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num" data-elem="118">4</div>
+          <div class="step-content">
+            <div class="step-title" data-elem="119">Build the Tahdig Base</div>
+            <div class="step-text" data-elem="120">Heat oil and 20g butter in the tahdig pot. On medium heat, bloom turmeric and paprika, then add remaining spices. Arrange potato slices tightly across the base. Flip them once for even browning — this step is rarely mentioned in recipes, but it is essential for the crust. Pour half a cup of saffron extract directly over the potatoes.</div>
+            <div class="step-image">
+              <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-4.webp')"></div>
+              <img data-src="https://arielportfolio.b-cdn.net/step-4.webp" src="" alt="Potatoes in pot" style="object-position:center center;">
+              <div class="step-image-caption" data-elem="121">Pine nuts, cranberries, pistachios — the topping mixture</div>
+            </div>
+            <div class="step-note" data-elem="122">⚠ Be careful of oil splatter when adding the saffron extract.</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num" data-elem="123">5</div>
+          <div class="step-content">
+            <div class="step-title" data-elem="124">Assemble the Pot</div>
+            <div class="step-text" data-elem="125">Toss the drained rice with the remaining saffron extract — it will look pale yellow now, but will turn deep amber during cooking. Layer it over the potatoes. Use a ladle handle to gently poke holes down to the potatoes for steam to rise. Scatter the topping mixture over everything.</div>
+            <div class="step-image">
+              <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-5.webp')"></div>
+              <img data-src="https://arielportfolio.b-cdn.net/step-5.webp" src="" alt="Rice with topping ready" style="object-position:center center;">
+              <div class="step-image-caption" data-elem="126">Assembled and ready — before the lid goes on</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num" data-elem="127">6</div>
+          <div class="step-content">
+            <div class="step-title" data-elem="128">Steam Under Towel</div>
+            <div class="step-text" data-elem="129">Cover with a water-dampened sheet of parchment paper, then place the lid on top. Cook on high heat for 5 minutes until steam begins to form, then reduce to the lowest possible flame. Cook for one full hour.</div>
+            <div class="step-image">
+              <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-6.webp')"></div>
+              <img data-src="https://arielportfolio.b-cdn.net/step-6.webp" src="" alt="Pot with parchment lid" style="object-position:center center;">
+              <div class="step-image-caption" data-elem="130">One hour under a damp parchment seal</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num" data-elem="131">7</div>
+          <div class="step-content">
+            <div class="step-title" data-elem="132">The Flip — The Moment of Truth</div>
+            <div class="step-text" data-elem="133">Remove from heat and allow to rest, covered, for 10 minutes. Place a large flat serving plate over the pot. Put on oven gloves. In one confident motion, flip. Lift the pot away to reveal the crust. The caramelized potatoes should emerge dark, crackling and fragrant — the tahdig's crown.</div>
+            <!-- VIDEO EMBED -->
+            <div class="video-step" style="position:relative;">
+              <div class="video-label" data-elem="134">▶ Live Video</div>
+              <video
+                id="tahdigVideo"
+                src="https://arielportfolio.b-cdn.net/step-7-flip.mp4"
+                poster="https://arielportfolio.b-cdn.net/step-8.webp"
+                playsinline
+                preload="metadata"
+                style="width:100%;height:400px;border:none;border-radius:4px;display:block;background:#000;">
+              </video>
+              <div id="videoPlayBtn" onclick="var v=document.getElementById('tahdigVideo');v.setAttribute('controls','');v.play();this.style.display='none';" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,0.25);">
+                <div style="width:80px;height:80px;background:rgba(200,16,46,0.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.5);transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                  <div style="width:0;height:0;border-style:solid;border-width:14px 0 14px 26px;border-color:transparent transparent transparent white;margin-left:6px;"></div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:12px;position:relative;overflow:hidden;border:2px solid var(--epoch-border);">
+              <img data-src="https://arielportfolio.b-cdn.net/step-8.webp" src="" alt="The finished tahdig" style="width:100%;height:280px;object-fit:cover;object-position:center center;display:block;transition:transform 0.5s ease;">
+              <div style="background:var(--epoch-dark);padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="color:#888;font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;" data-elem="135">The finished tahdig — cranberry-pistachio crown</span>
+                <span style="color:var(--epoch-gold);font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;" data-elem="136">Photography · The Candidate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--epoch-light);border:1px solid var(--epoch-border);padding:20px;margin-top:16px;">
+          <div style="font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--epoch-red);margin-bottom:10px;" data-elem="137">Author's Note on This Recipe</div>
+          <p style="font-size:13px;color:#555;line-height:1.7;" data-elem="138">I'm not a trained chef — I'm someone with a genuine palate and a love for experimenting. I took a classic tahdig and added my own layer: the cranberry-pistachio-pine nut topping, saffron-steeped from scratch rather than store-bought. I don't follow recipes to the letter; I work with instinct, and then document what actually worked. That approach — curious, honest, and hands-on — is what I'd bring to Epoch's food column.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE 5 — THE WANDERING APPRENTICE PITCH
+════════════════════════════════ -->
+════════════════════════════════ -->
+<div class="page" id="page4">
+  <div class="pitch-page">
+    <div class="pitch-header">
+      <div class="pitch-tag" data-elem="139">Proposed Column · Travel &amp; Skills</div>
+      <h1 class="pitch-title" data-elem="140">The Wandering<br>Apprentice</h1>
+      <p class="pitch-subtitle" data-elem="141">A series about a modern man who stops being a tourist and starts being a student — collecting skills, not souvenirs, across farms, workshops, and traditional kitchens around the world.</p>
+    </div>
+
+    <div class="pitch-body">
+      <div>
+        <div class="pitch-section-title" data-elem="142">The Concept</div>
+        <p data-elem="143">This isn't travel writing in the traditional sense. It's not destinations, hotels, or experiences. It's about the <strong data-elem="144">transfer of knowledge</strong> — skills that were once common to any capable person but have been outsourced, automated, or simply forgotten.</p>
+        <p data-elem="145">The format: volunteer on farms and with craftspeople (WWOOF and similar programs), work alongside them, and write about what the actual labor feels like from the inside. Complement this with formal workshops in photography, freediving, surfing, and handyman skills.</p>
+        <p data-elem="146">The tone isn't expertise. It's the opposite: an honest account of being a beginner — struggling, failing, and eventually getting something right with your hands. The reader doesn't come for instruction. They come for the <strong data-elem="147">window into a world they've lost touch with</strong>.</p>
+
+        <div class="pitch-value-box">
+          <div style="font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--epoch-gold);margin-bottom:10px;" data-elem="148">What This Is Not</div>
+          <p data-elem="149">This is not Paris Hilton on a farm for laughs. It's not Gordon Ramsay showing off mastery. It's not Michael Pollan philosophizing about the idea of bread. It's a person with <strong data-elem="150">no prior expertise</strong> showing what it actually costs — in sweat, failure, and time — to become even minimally capable at something that used to be basic human knowledge.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="pitch-section-title" data-elem="151">Planned Topics — The Skill Pipeline</div>
+        <p data-elem="152">Each article is built around a specific skill or knowledge domain. This column has at least 20 planned articles.</p>
+
+        <div class="skills-grid">
+          <div class="skill-chip" data-elem="153">Traditional Agriculture</div>
+          <div class="skill-chip" data-elem="154">Permaculture</div>
+          <div class="skill-chip" data-elem="155">Animal Husbandry</div>
+          <div class="skill-chip" data-elem="156">Carpentry</div>
+          <div class="skill-chip" data-elem="157">Fishing (Sea &amp; River)</div>
+          <div class="skill-chip" data-elem="158">Hunting &amp; Tracking</div>
+          <div class="skill-chip" data-elem="159">Cheesemaking</div>
+          <div class="skill-chip" data-elem="160">Sourdough Baking</div>
+          <div class="skill-chip" data-elem="161">Fermentation</div>
+          <div class="skill-chip" data-elem="162">Freediving</div>
+          <div class="skill-chip" data-elem="163">Surfing</div>
+          <div class="skill-chip" data-elem="164">Photography</div>
+          <div class="skill-chip" data-elem="165">Handyman Skills</div>
+          <div class="skill-chip" data-elem="166">Open-Fire Cooking</div>
+          <div class="skill-chip" data-elem="167">Foraging</div>
+          <div class="skill-chip" data-elem="168">Butchery</div>
+        </div>
+
+        <div style="margin-top:24px;">
+          <div class="pitch-section-title" data-elem="169">The Unique Value for Epoch Readers</div>
+          <p data-elem="170">Epoch's readers are educated, curious, and interested in the kind of content that doesn't treat them as passive consumers. This column offers them something distinct: not instruction (there's YouTube for that), but <strong data-elem="171">perspective</strong>. What does it feel like to learn something hard with your hands? What does the world look like differently once you can do it yourself?</p>
+          <p data-elem="172">The overlap with existing Epoch content is real: personal development, connection to values, the dignity of honest work. But the format — first-person, field-embedded, honest about failure — is something Epoch doesn't currently have.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo strip -->
+    <div class="photo-strip">
+      <img src="" alt="Chickpea flour">
+      <img src="" alt="Gondi balls">
+      <img src="" alt="Gondi boiling">
+      <img src="" alt="The result">
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /magazine-viewer -->
+
+<script>
+  let currentPage = 0;
+  const totalPages = 5;
+
+  function goTo(n) {
+    document.getElementById('page' + currentPage).classList.remove('active');
+    currentPage = n;
+    document.getElementById('page' + currentPage).classList.add('active');
+    document.getElementById('pageCounter').textContent = (currentPage + 1) + ' / ' + totalPages;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    location.hash = 'page' + n;
+    document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i === currentPage);
+    });
+    // Load video when recipe page (page 3) becomes active
+    if (n === 3) {
+      loadRecipeImages();
+      const video = document.getElementById('tahdigVideo');
+      if (video && video.getAttribute('src') === '') {
+        video.src = 'https://arielportfolio.b-cdn.net/step-7-flip.mp4';
+        video.preload = 'metadata';
+        video.load();
+      }
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' && currentPage < totalPages - 1) goTo(currentPage + 1);
+    if (e.key === 'ArrowLeft' && currentPage > 0) goTo(currentPage - 1);
+  });
+
+  // Load recipe images after 2s, or immediately if user navigates to recipe first
+  let recipeImagesLoaded = false;
+  const loadRecipeImages = () => {
+    if (recipeImagesLoaded) return;
+    recipeImagesLoaded = true;
+    document.querySelectorAll('#page3 img[data-src]').forEach(img => {
+      if (img.getAttribute('src') === '') { img.src = img.dataset.src; }
+    });
+  };
+  setTimeout(loadRecipeImages, 2000);
+
+  // Init — restore from hash if present
+  const hash = location.hash.replace('#page', '');
+  const startPage = (hash !== '' && !isNaN(hash) && +hash < totalPages) ? +hash : 0;
+  goTo(startPage);
+</script>
+
+</body>
+</html>
