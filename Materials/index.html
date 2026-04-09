@@ -1721,16 +1721,19 @@
     if (e.key === 'ArrowLeft' && currentPage > 0) goTo(currentPage - 1);
   });
 
-  // Load recipe images after 2s, or immediately if user navigates to recipe first
+  // Load recipe images sequentially from step-1 onwards, or immediately if user navigates to recipe
   let recipeImagesLoaded = false;
   const loadRecipeImages = () => {
     if (recipeImagesLoaded) return;
     recipeImagesLoaded = true;
-    document.querySelectorAll('#page3 img[data-src]').forEach(img => {
-      if (img.getAttribute('src') === '') { img.src = img.dataset.src; }
+    const imgs = Array.from(document.querySelectorAll('#page3 img[data-src]'));
+    imgs.forEach((img, i) => {
+      setTimeout(() => {
+        if (img.getAttribute('src') === '') { img.src = img.dataset.src; }
+      }, i * 100);
     });
   };
-  setTimeout(loadRecipeImages, 2000);
+  setTimeout(loadRecipeImages, 0);
 
   // Init — restore from hash if present
   const hash = location.hash.replace('#page', '');
