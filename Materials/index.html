@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" style="zoom: 63%;">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script>history.scrollRestoration = 'manual'; window.scrollTo(0, 0);</script>
 <title>Epoch Magazine — Candidate Portfolio</title>
 <link rel="icon" type="image/svg+xml" href="https://arielportfolio.b-cdn.net/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -19,6 +20,7 @@
     --epoch-border: #D4C9B0;
   }
 
+  html { scroll-behavior: auto; }
   body {
     background: #2A2A2A;
     font-family: 'Source Serif 4', Georgia, serif;
@@ -30,7 +32,7 @@
   .magazine-viewer {
     max-width: 900px;
     margin: 0 auto;
-    padding: 20px 0 60px;
+    padding: 0 0 60px;
   }
 
   .page {
@@ -41,6 +43,7 @@
     animation: pageIn 0.4s ease;
   }
   .page.active { display: block; }
+  #page0 { min-height: 0 !important; height: auto !important; }
 
   @keyframes pageIn {
     from { opacity: 0; transform: translateY(8px); }
@@ -506,6 +509,57 @@
     text-transform: uppercase;
     margin-left: 8px;
   }
+  /* Translator tooltips */
+  .tt {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+    border-bottom: 1px dashed var(--epoch-red);
+  }
+  .tt-box {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 0;
+    transform: none;
+    background: #3a9fa8;
+    color: #1a1a1a;
+    font-family: 'Heebo', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 1.35;
+    padding: 10px 14px;
+    border-radius: 12px;
+    width: 270px;
+    max-width: 90vw;
+    z-index: 999999;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+    pointer-events: none;
+    white-space: normal;
+  }
+  .tt-box::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: var(--arrow-left, 40px);
+    width: 18px;
+    height: 14px;
+    background: #3a9fa8;
+    clip-path: polygon(0% 0%, 100% 0%, 30% 100%);
+  }
+  .tt-box.tt-visible { display: block !important; }
+  .tt:hover .tt-box { display: block !important; }
+  .tt-author {
+    display: block;
+    font-size: 10px;
+    opacity: 0.55;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+  }
+  @media(max-width:600px) {
+    .tt-box { width: 220px; }
+  }
+
   .article-body {
     display: grid;
     grid-template-columns: 1fr 280px;
@@ -1070,37 +1124,25 @@
   }
 
   /* ── COVER new layout classes ── */
+  #page0 { min-height: 0; height: auto; }
   .cover-page {
-    position: relative !important;
     background: #3a2e24 !important;
-    min-height: 100vh !important;
+    min-height: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    overflow: hidden !important;
   }
   .cover-bg-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    z-index: 0;
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    flex-shrink: 0;
   }
-  .cover-bg-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.35) 0%,
-      rgba(0,0,0,0.1) 40%,
-      rgba(0,0,0,0.55) 80%,
-      rgba(0,0,0,0.82) 100%
-    );
-    z-index: 1;
-  }
-  .cover-page > * { position: relative; z-index: 2; }
+  .cover-bg-overlay { display: none !important; }
+  .cover-page > * { z-index: 2; }
   .cover-header {
     background: transparent !important;
     border-bottom: none !important;
@@ -1139,7 +1181,6 @@
   .cover-headline-block {
     padding: 14px 48px 8px;
     text-align: center;
-    margin-top: auto;
   }
   .cover-headline-block h1 {
     font-family: 'Playfair Display', serif;
@@ -1154,6 +1195,13 @@
     padding: 0 48px 28px;
     border-top: 1px solid rgba(255,255,255,0.25);
     margin-top: 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .cover-teasers.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   .cover-teasers-inner {
     display: flex;
@@ -1253,7 +1301,6 @@
 <!-- ════════════════════════════════
      PAGE 2 — COVER LETTER
 ════════════════════════════════ -->
-════════════════════════════════ -->
 <div class="page" id="page1">
   <div class="letter-page">
     <div class="letter-header">
@@ -1325,13 +1372,12 @@
 <!-- ════════════════════════════════
      PAGE 3 — TRANSLATED ARTICLE
 ════════════════════════════════ -->
-════════════════════════════════ -->
 <div class="page" id="page2">
   <div class="article-page">
     <div class="article-header">
       <div class="article-section-tag" data-elem="34">Psychology · Personal Development</div>
       <h1 class="article-title" data-elem="35">The Man Who Refused to Surrender to Fate's Blows</h1>
-      <p class="article-subtitle" data-elem="36">William Mitchell lost his looks, his body, and his way of life — but not his spirit. From the ashes, he discovered three simple principles that transformed his pain into a life-changing force.</p>
+      <p class="article-subtitle" data-elem="36">William Mitchell lost his looks, his body, and <span class="tt">his way of life<span class="tt-box"><span style="direction:rtl;display:block;text-align:right;">המקורי: &quot;ואת מהלך חייו&quot;</span><span style="direction:ltr;display:block;text-align:left;">Author's intent not clear, even in Hebrew. Could mean:<br><strong>the course of his life</strong> - suggests trajectory, direction, future plans.<br><strong>his way of life - </strong>suggests lifestyle, daily habits, how he lived, routines.</span><span style="direction:rtl;display:block;text-align:right;">בעברית הייתי משנה לאורח חייו</span></span></span> — but not his spirit. From the ashes, he discovered three simple principles that transformed his pain into a life-changing force.</p>
       <div class="article-byline">
         <span><strong data-elem="37">Dina Gordon</strong></span>
         <div class="article-byline-dot"></div>
@@ -1360,23 +1406,23 @@
 
         <p data-elem="47">Despite the presence of two dedicated private nurses, Mitchell felt like a limp marionette. His ability to endure steadily eroded until one day he asked to die. In response, his doctor came into the room and made an unconventional offer: Mitchell himself would manage his own treatment plan. Since only he knew how much he could bear, the doctor explained, they would go through the treatment plan together item by item, and Mitchell would decide how to proceed and what to forgo.</p>
 
-        <p data-elem="47b">Taking responsibility for his treatment was like an empowerment bomb. The word <em data-elem="48">responsibility</em> is derived from <em data-elem="49">response</em> and <em data-elem="50">ability</em> &#8212; and for Mitchell, that meaning was fully realized: active participation in the process gave him both the ability and the willingness to control, even if only slightly, his own condition.</p>
+        <p data-elem="47b">Taking responsibility for his treatment was like an empowerment bomb. The word <em data-elem="48">responsibility</em> breaks down into <em data-elem="49">response</em> and <em data-elem="50">ability</em> &#8212; and for Mitchell, that meaning was fully realized: active participation in the process gave him both the ability and the willingness to control, even if only slightly, his own condition.</p>
 
         <p data-elem="47c">&#8220;You alone are responsible for your life,&#8221; he recalled a principle he had learned long before, and now, precisely in the depths of hardship, he was given the chance to truly live it.</p>
 
         <p data-elem="47d">Mitchell&#8217;s insight echoes the story of Ken Campbell, who in 1983 survived a nearly identical accident: a fuel truck hit his car and burned 75% of his body at the most severe burn degree. Doctors said he would not make it. But when he regained consciousness, he declared that he alone was responsible for his life &#8212; and chose to survive. When doctors claimed he would never walk again, he got up. When they warned he could never compete in an Ironman triathlon, he crossed the finish line in tears of victory.</p>
 
-        <p data-elem="51">Mitchell spent four months in hospital. One caregiver who left a deep impression on him was his physiotherapist, Beverley. In his imagination, in her past, she had been a marine combat fitness instructor &#8212; tough, rigid, merciless, and uncompromising. Every day she would come into his room with a list of five tasks that seemed impossible to him. She never let a single one slide. Yet it was precisely because of her that, day after day, Mitchell managed to complete five more tasks that had seemed impossible at the outset.</p>
+        <p data-elem="51">Mitchell spent four months in hospital. One caregiver who left a deep impression on him was his physiotherapist, Beverley. In his imagination, in her past, she had been a drill instructor in the Marines &#8212; tough, rigid, merciless, and uncompromising. Every day she would come into his room with a list of five tasks that seemed impossible to him. She never let a single one slide. Yet it was precisely because of her that, day after day, Mitchell managed to complete five more tasks that had seemed impossible at the outset.</p>
 
         <p data-elem="51b">After four months, Mitchell decided it was time to leave the hospital. The doctors objected, but Beverley argued that if Mitchell had chosen to take responsibility for his life, everyone should support that decision and prepare him for his new mission: managing his life outside the hospital. And so, it was.</p>
 
         <h2 data-elem="52">2. Accept Yourself as You Are</h2>
 
-        <p data-elem="53">Mitchell&#8217;s transition to life outside the hospital came with many difficulties. Countless trivial actions became challenges &#8212; and Mitchell would sometimes just lie in bed, crying and screaming in frustration. How do you open a door when you have no fingers and the lightest touch causes sharp pain? Gradually he learned that his thoughts could be either his prison or a doorway to creativity. He learned to open doors and turn on the TV with his foot, and to eat independently by fastening a rubber band to his hand.</p>
+        <p data-elem="53"><span class="tt">Mitchell&#8217;s<span class="tt-box"><span style="direction:rtl;display:block;text-align:right;">במאמר המקורי מצוין השם קמפבל ולא מיטשל &quot;המעבר של קמפבל לחיים&quot;</span></span></span> transition to life outside the hospital came with many difficulties. Countless trivial actions became challenges &#8212; and Mitchell would sometimes just lie in bed, crying and screaming in frustration. How do you open a door when you have no fingers and the lightest touch causes sharp pain? Gradually he learned that his thoughts could be either his prison or a doorway to creativity. He learned to open doors and turn on the TV with his foot, or to eat on his own by <span class="tt">fastening a rubber band to his hand<span class="tt-box"><span style="direction:rtl;display:block;text-align:right;">בעיניי לא ברור לקורא איך הוא עשה זאת<br>&quot;או לאכול לבד באמצעות חיבור גומייה לכף ידו&quot;</span></span></span>.</p>
 
         <p data-elem="54">But the most difficult ordeal was moving through the world among other people. Before the accident he had thought of himself as handsome &#8212; he had even had surgery on his chin to look more like the actors he admired in Hollywood films. Now he felt that people on the street avoided looking at him, and those who did speak to him avoided making eye contact.</p>
 
-        <p data-elem="54b">One day, a group of children shouted after him: &#8220;Monster, monster.&#8221; Yet in that moment Mitchell felt not anger, but an awakening to the second principle: <em data-elem="55">accept yourself as you are</em>. He remembered that if you focus too much on the negative aspects of yourself, you actually reinforce them and prevent yourself from overcoming them. It is better to direct your energy toward what is good in you and what you succeed at &#8212; and those parts grow stronger, while the less successful ones gradually shrink.</p>
+        <p data-elem="54b">One day, a group of children shouted after him: &#8220;Monster, monster!&#8221; Yet in that moment Mitchell felt not anger, but an awakening to the second principle: <em data-elem="55">accept yourself as you are</em>. He remembered that if you focus too much on the negative aspects of yourself, you actually reinforce them and prevent yourself from overcoming them. It is better to direct your energy toward what is good in you and what you succeed at &#8212; and those parts grow stronger, while the less successful ones gradually shrink.</p>
 
         <p data-elem="54c">American therapist Sean Stephenson was one of the most powerful advocates of self-acceptance. Stephenson was born with a severe condition that made his bones fragile and brittle. Doctors told his parents he would live only a few days, but they were proven wrong. His body was small, his face disfigured &#8212; but his spirit was enormous. He began leading motivational workshops at age 17, later married, completed an undergraduate degree, and wrote two motivational books.</p>
 
@@ -1384,7 +1430,7 @@
 
         <h2 data-elem="56">3. You Can Choose How to Respond to Life&#8217;s Hardships</h2>
 
-        <p data-elem="57">Mitchell gradually returned to an independent life. Six months after the accident, he returned to flying &#8212; first with an instructor, and after 50 hours of flight time, he was able to take off alone again. To mark this moving moment, he bought himself a brand new Cessna 206. He moved to a beautiful town in Colorado, became a successful businessman, and felt he had won the battle for his life.</p>
+        <p data-elem="57">Mitchell gradually returned to an independent life. Six months after the accident, he returned to flying &#8212; first with an instructor, and after 50 hours of flight time, he was able to take off alone again. To mark this moving moment, he bought himself a brand-new Cessna 206. He moved to a beautiful town in Colorado, became a successful businessman, and felt he had won the battle for his life.</p>
 
         <p data-elem="57b">But fate had other plans. In November 1975, a technical malfunction caused his plane to crash on the runway. All four passengers walked away unharmed &#8212; but Mitchell, just 32 years old, had severely hurt his back. He was paralyzed from the waist down and would be confined to a wheelchair for the rest of his life.</p>
 
@@ -1416,8 +1462,12 @@
 
       <div class="article-sidebar">
         <div class="sidebar-box">
-          <div class="sidebar-box-title" data-elem="72">Translator's Note</div>
-          <p data-elem="73">This article was originally published in Hebrew by Epoch Magazine (Israel). I translated and adapted it into publication-ready American English, preserving the journalistic voice while ensuring natural flow and cultural accuracy for a US readership.</p>
+          <div class="sidebar-box-title" data-elem="72a">How to Read This</div>
+          <p data-elem="73a">Hover over any phrase underlined with a <span style="border-bottom: 1px dashed var(--epoch-red);">red dotted line</span> to view a comment.</p>
+        </div>
+        <div class="sidebar-box">
+          <div class="sidebar-box-title" data-elem="72">Translator's Notes</div>
+          <p data-elem="73b">This is an English translation produced under the assumption that the original article was written in Hebrew. I translated and adapted it into publication-ready American English, preserving the journalistic voice while ensuring natural flow and cultural accuracy for a US readership.</p>
         </div>
         <div class="sidebar-box">
           <div class="sidebar-box-title" data-elem="74">About the Subject</div>
@@ -1425,8 +1475,8 @@
         </div>
         <div class="sidebar-box">
           <div class="sidebar-box-title" data-elem="76">The Three Principles</div>
-          <p data-elem="77">1. <strong data-elem="78">You alone are responsible for your life.</strong><br><br>
-          2. <strong data-elem="79">Accept yourself as you are.</strong><br><br>
+          <p data-elem="77">1. <strong data-elem="78">You alone are responsible for your life.</strong><br>
+          2. <strong data-elem="79">Accept yourself as you are.</strong><br>
           3. <strong data-elem="80">You can choose how to respond to hardship.</strong></p>
         </div>
       </div>
@@ -1464,9 +1514,9 @@
 
         <div class="ingredient-group">
           <div class="ingredient-group-name" data-elem="85">The Base</div>
-          <div class="ingredient-item" data-elem="86">Potatoes — enough to cover base, sliced 1cm thick</div>
-          <div class="ingredient-item" data-elem="87">Generous olive oil (to coat pot base)</div>
-          <div class="ingredient-item" data-elem="88">40g butter, divided</div>
+          <div class="ingredient-item" data-elem="86">Potatoes — enough to cover base, peeled and sliced 1cm thick</div>
+          <div class="ingredient-item" data-elem="87">Generous olive oil — to coat pan and pot bases</div>
+          <div class="ingredient-item" data-elem="88">40g butter, divided into two</div>
         </div>
 
         <div class="ingredient-group">
@@ -1499,17 +1549,26 @@
       </div>
 
       <div class="recipe-steps">
-        <div class="steps-title" data-elem="105">Method</div>
+        <div class="steps-title" data-elem="105">Tahdig Recipe</div>
+
+        <div style="margin-bottom:16px;border:2px solid var(--epoch-border);">
+          <div style="overflow:hidden;">
+            <img data-src="https://arielportfolio.b-cdn.net/step-8.webp" src="" alt="The finished tahdig" style="width:100%;height:280px;object-fit:cover;object-position:center center;display:block;transition:transform 0.5s ease;">
+          </div>
+          <div style="background:var(--epoch-dark);padding:8px 12px;text-align:center;">
+            <span style="color:var(--epoch-gold);font-family:'Heebo',sans-serif;font-size:12px;letter-spacing:1px;">The finished tahdig crown.. after a bite <span style="font-size:16px;">😉</span></span>
+          </div>
+        </div>
 
         <div class="step">
           <div class="step-num" data-elem="106">1</div>
           <div class="step-content">
-            <div class="step-title" data-elem="107">Parboil the Rice</div>
-            <div class="step-text" data-elem="108">Rinse rice until water runs clear, then soak for 2 hours. Cook like pasta: bring 5L salted water to a boil, add rice, cook 7 minutes until grains soften on the outside but remain firm in the center. Drain and rinse cold to stop cooking.</div>
+            <div class="step-title" data-elem="107">Parboil the Rice and Set the Potato Base</div>
+            <div class="step-text" data-elem="108">Rinse rice until water runs clear, then soak for 2 hours. Cook like pasta: bring 5L salted water to a boil, add rice, cook 7 minutes until grains soften on the outside but remain firm in the center. Drain and rinse cold to stop cooking.<br>Heat pot on medium heat, place oil and 20g butter to fully coat it. Add mix of paprika, turmeric, soup powder, salt and black pepper. Once fragrant, cover the base with potato slices. Fry on both sides.</div>
             <div class="step-image">
               <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-1.webp')"></div>
               <img data-src="https://arielportfolio.b-cdn.net/step-1.webp" src="" alt="Potato base" style="object-position:center top;">
-              <div class="step-image-caption" data-elem="109">The potato base — sliced 1cm, tiled tight</div>
+              <div class="step-image-caption" data-elem="109">The potato base — peeled, sliced 1cm, tiled tight</div>
             </div>
           </div>
         </div>
@@ -1518,11 +1577,12 @@
           <div class="step-num" data-elem="110">2</div>
           <div class="step-content">
             <div class="step-title" data-elem="111">Brew the Saffron Extract</div>
+            <div class="step-note" style="margin-bottom:8px;">★ Perform in parallel with step 1</div>
             <div class="step-text" data-elem="112">Blend saffron, ice-cold water and brown sugar until combined. Cover and let steep for one hour. The liquid will turn a deep amber gold.</div>
             <div class="step-image">
               <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-2.webp')"></div>
               <img data-src="https://arielportfolio.b-cdn.net/step-2.webp" src="" alt="Saffron extract" style="object-position:center center;">
-              <div class="step-image-caption" data-elem="113">Rice over potatoes — before the saffron pour</div>
+              <div class="step-image-caption" data-elem="113">The saffron extract — deep amber after one hour steep</div>
             </div>
           </div>
         </div>
@@ -1531,11 +1591,12 @@
           <div class="step-num" data-elem="114">3</div>
           <div class="step-content">
             <div class="step-title" data-elem="115">Prepare the Topping Mixture</div>
+            <div class="step-note" data-elem="116b">⚠ Be careful of oil splatter when adding the saffron extract.</div>
             <div class="step-text" data-elem="116">Heat olive oil and 20g butter in a pan. Add pine nuts first — toast until lightly golden. Add remaining topping ingredients and stir-fry 2 minutes. Pour in half a cup of saffron extract with salt and pepper; cook one more minute.</div>
             <div class="step-image">
               <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-3.webp')"></div>
               <img data-src="https://arielportfolio.b-cdn.net/step-3.webp" src="" alt="Topping mix" style="object-position:center center;">
-              <div class="step-image-caption" data-elem="117">The saffron extract — deep amber after one hour steep</div>
+              <div class="step-image-caption" data-elem="117">Pine nuts, cranberries, pistachios — the topping mixture</div>
             </div>
           </div>
         </div>
@@ -1543,25 +1604,24 @@
         <div class="step">
           <div class="step-num" data-elem="118">4</div>
           <div class="step-content">
-            <div class="step-title" data-elem="119">Build the Tahdig Base</div>
-            <div class="step-text" data-elem="120">Heat oil and 20g butter in the tahdig pot. On medium heat, bloom turmeric and paprika, then add remaining spices. Arrange potato slices tightly across the base. Flip them once for even browning — this step is rarely mentioned in recipes, but it is essential for the crust. Pour half a cup of saffron extract directly over the potatoes.</div>
+            <div class="step-title" data-elem="119">Layer the Rice</div>
+            <div class="step-text" data-elem="120">Mix the drained rice with the remaining saffron extract — it will look pale yellow now, but will turn deep amber during cooking. Layer it over the potatoes. Use a ladle handle to gently poke holes down to the potatoes for steam to rise. Scatter the topping mixture over everything.</div>
             <div class="step-image">
               <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-4.webp')"></div>
-              <img data-src="https://arielportfolio.b-cdn.net/step-4.webp" src="" alt="Potatoes in pot" style="object-position:center center;">
-              <div class="step-image-caption" data-elem="121">Pine nuts, cranberries, pistachios — the topping mixture</div>
+              <img data-src="https://arielportfolio.b-cdn.net/step-4.webp" src="" alt="Rice layered over potatoes" style="object-position:center center;">
+              <div class="step-image-caption" data-elem="121">Rice over potatoes — before the saffron pour</div>
             </div>
-            <div class="step-note" data-elem="122">⚠ Be careful of oil splatter when adding the saffron extract.</div>
           </div>
         </div>
 
         <div class="step">
           <div class="step-num" data-elem="123">5</div>
           <div class="step-content">
-            <div class="step-title" data-elem="124">Assemble the Pot</div>
-            <div class="step-text" data-elem="125">Toss the drained rice with the remaining saffron extract — it will look pale yellow now, but will turn deep amber during cooking. Layer it over the potatoes. Use a ladle handle to gently poke holes down to the potatoes for steam to rise. Scatter the topping mixture over everything.</div>
+            <div class="step-title" data-elem="124">Layer the Topping Mixture</div>
+            <div class="step-text" data-elem="125">Scatter the topping mixture over the rice, distributing evenly across the surface.</div>
             <div class="step-image">
               <div class="img-bg" style="background-image:url('https://arielportfolio.b-cdn.net/step-5.webp')"></div>
-              <img data-src="https://arielportfolio.b-cdn.net/step-5.webp" src="" alt="Rice with topping ready" style="object-position:center center;">
+              <img data-src="https://arielportfolio.b-cdn.net/step-5.webp" src="" alt="Topping scattered on rice" style="object-position:center center;">
               <div class="step-image-caption" data-elem="126">Assembled and ready — before the lid goes on</div>
             </div>
           </div>
@@ -1602,19 +1662,20 @@
                 </div>
               </div>
             </div>
-            <div style="margin-top:12px;position:relative;overflow:hidden;border:2px solid var(--epoch-border);">
-              <img data-src="https://arielportfolio.b-cdn.net/step-8.webp" src="" alt="The finished tahdig" style="width:100%;height:280px;object-fit:cover;object-position:center center;display:block;transition:transform 0.5s ease;">
-              <div style="background:var(--epoch-dark);padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
-                <span style="color:#888;font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;" data-elem="135">The finished tahdig — cranberry-pistachio crown</span>
-                <span style="color:var(--epoch-gold);font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:1px;text-transform:uppercase;" data-elem="136">Photography · The Candidate</span>
+            <div style="margin-top:12px;border:2px solid var(--epoch-border);">
+              <div style="overflow:hidden;">
+                <img data-src="https://arielportfolio.b-cdn.net/about-me.webp" src="" alt="About the candidate" style="width:100%;height:280px;object-fit:cover;object-position:center center;display:block;transition:transform 0.5s ease;">
+              </div>
+              <div style="background:var(--epoch-dark);padding:8px 12px;display:flex;justify-content:center;align-items:center;">
+                <span style="color:var(--epoch-gold);font-family:'Heebo',sans-serif;font-size:12px;letter-spacing:1px;" data-elem="135">Before the bite haha</span>
               </div>
             </div>
           </div>
         </div>
 
         <div style="background:var(--epoch-light);border:1px solid var(--epoch-border);padding:20px;margin-top:16px;">
-          <div style="font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--epoch-red);margin-bottom:10px;" data-elem="137">Author's Note on This Recipe</div>
-          <p style="font-size:13px;color:#555;line-height:1.7;" data-elem="138">I'm not a trained chef — I'm someone with a genuine palate and a love for experimenting. I took a classic tahdig and added my own layer: the cranberry-pistachio-pine nut topping, saffron-steeped from scratch rather than store-bought. I don't follow recipes to the letter; I work with instinct, and then document what actually worked. That approach — curious, honest, and hands-on — is what I'd bring to Epoch's food column.</p>
+          <div style="font-family:'Heebo',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--epoch-red);margin-bottom:10px;" data-elem="137">Author's Recommendation</div>
+          <p style="font-size:13px;color:#555;line-height:1.7;" data-elem="138">Pair with Persian Gondi, chickpea kofta — Find out next time with me 😊</p>
         </div>
       </div>
     </div>
@@ -1623,7 +1684,6 @@
 
 <!-- ════════════════════════════════
      PAGE 5 — THE WANDERING APPRENTICE PITCH
-════════════════════════════════ -->
 ════════════════════════════════ -->
 <div class="page" id="page4">
   <div class="pitch-page">
@@ -1699,8 +1759,9 @@
     currentPage = n;
     document.getElementById('page' + currentPage).classList.add('active');
     document.getElementById('pageCounter').textContent = (currentPage + 1) + ' / ' + totalPages;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    location.hash = 'page' + n;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     document.querySelectorAll('.nav-btn').forEach((btn, i) => {
       btn.classList.toggle('active', i === currentPage);
     });
@@ -1735,11 +1796,81 @@
   };
   setTimeout(loadRecipeImages, 0);
 
-  // Init — restore from hash if present
-  const hash = location.hash.replace('#page', '');
-  const startPage = (hash !== '' && !isNaN(hash) && +hash < totalPages) ? +hash : 0;
-  goTo(startPage);
+  goTo(0);
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
+  // Always anchor to top on refresh regardless of zoom level
+  window.onload = () => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+
+  // Reveal cover teasers 1s after load
+  setTimeout(() => {
+    document.querySelector('.cover-teasers').classList.add('visible');
+  }, 1000);
 </script>
 
+
+<script>
+document.querySelectorAll(".tt").forEach(function(el) {
+  var box = el.querySelector(".tt-box");
+
+  function positionTooltip() {
+    box.style.visibility = 'hidden';
+    box.style.display = 'block';
+    box.style.left = '0px';
+
+    var boxWidth = box.offsetWidth;
+    var elWidth = el.offsetWidth;
+    var margin = 8;
+
+    // anchor = center of .tt element
+    var elRect = el.getBoundingClientRect();
+    var anchorX = elRect.left + elWidth / 2;
+    var viewportWidth = window.innerWidth;
+
+    // ideal left in viewport coords
+    var idealLeft = anchorX - boxWidth / 2;
+    // clamp within the .page element bounds, not viewport
+    var page = el.closest('.page');
+    var pageRect = page.getBoundingClientRect();
+    var clampedLeft = Math.max(pageRect.left + margin, Math.min(idealLeft, pageRect.right - boxWidth - margin));
+
+    // left on .tt-box is relative to .tt (inline-block, containing block)
+    box.style.left = (clampedLeft - elRect.left) + 'px';
+
+    // tail left edge sits at anchor, clamped inside box
+    var arrowPos = anchorX - clampedLeft;
+    arrowPos = Math.max(12, Math.min(arrowPos, boxWidth - 30));
+    box.style.setProperty('--arrow-left', arrowPos + 'px');
+
+    box.style.visibility = '';
+    box.style.display = '';
+  }
+
+  el.addEventListener("mouseenter", function() {
+    positionTooltip();
+    box.classList.add("tt-visible");
+  });
+
+  el.addEventListener("mouseleave", function() {
+    box.classList.remove("tt-visible");
+  });
+
+  el.addEventListener("touchstart", function(e) {
+    positionTooltip();
+    box.classList.add("tt-visible");
+    e.stopPropagation();
+  }, {passive: true});
+
+  document.addEventListener("touchstart", function() {
+    box.classList.remove("tt-visible");
+  }, {passive: true});
+});
+</script>
 </body>
 </html>
