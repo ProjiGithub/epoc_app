@@ -1,0 +1,43 @@
+To run the entire workflow in one go, you can chain the commands using &&. This ensures that each step only runs if the previous one succeeds.
+Replace "your message" with your actual commit description:
+git pull origin main && git add . && git commit -m "your message" && git push origin main
+Empty version ready for my copy:
+git pull origin main && git add . && git commit -m "adding gondi pictures" && git push origin main
+
+## What this does:
+   1. git pull: Syncs your local main with the remote repo at https://github.com/ProjiGithub/epoc_app.git.
+   2. git add .: Stages all your edits and new files (like the .gitignore).
+   3. git commit: Records the changes with your message.
+   4. git push: Uploads everything back to the server.
+------------------------------------------------------------------------------------------------------------------------------------
+## The Cleanest Solo Workflow##
+## 1. Sync
+git pull origin main
+Do this before you touch anything. It merges any remote changes (like edits from another machine) into your local code.
+## 2. Edit
+Write your code. Add files, delete things, or edit existing lines.
+## 3. Verify (The "Why not this instead" part)
+git status
+Use this to see the list of files you touched.
+git diff
+Use this to see the actual code changes inside those files.
+## 4. Stage
+git add .
+This gathers all your changes into a "package" ready for the commit.
+## 5. Commit
+git commit -m "Your message"
+This saves that package into your local history.
+## 6. Push
+git push origin main
+This sends your local history up to the server.
+------------------------------
+## Summary of status vs diff
+
+* status is the Table of Contents (Which files changed?).
+* diff is the Content (What specific lines changed?).
+
+You need both to ensure you aren't pushing junk code or forgetting a new file.
+Should we stick to Standard Pull (no rebase) to keep your workflow simple?
+
+
+
